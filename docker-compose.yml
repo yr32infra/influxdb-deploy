@@ -1,0 +1,53 @@
+services:
+  influxdb:
+    image: influxdb:2.7.11@sha256:2205d18d52b9182e844bae113a4fc81360ce085c1c6b74c8ebc283bf66113087
+    hostname: influxdb
+    container_name: influxdb__influxdb
+    restart: unless-stopped
+
+    volumes:
+      - type: volume
+        source: influxdb_conf
+        target: /etc/influxdb2
+
+      - type: volume
+        source: influxdb_data
+        target: /var/lib/influxdb2
+
+    expose:
+      - 8086
+
+    networks:
+      - default
+
+    deploy:
+      resources:
+        limits:
+          memory: 2048m
+
+  cloudflared:
+    image: cloudflare/cloudflared:2024.6.0@sha256:8245fa2eeeabf437b061909cd59f123b39730f626bc676dc37cd3fb9f6880580
+    hostname: cloudflared
+    container_name: influxdb__cloudflared
+    restart: unless-stopped
+
+    command: tunnel run --token ${TUNNEL_TOKEN}
+
+    networks:
+      default:
+
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+volumes:
+  influxdb_conf:
+    name: influxdb__influxdb_conf
+
+  influxdb_data:
+    name: influxdb__influxdb_data
+
+networks:
+  default:
+    name: influxdb__default
