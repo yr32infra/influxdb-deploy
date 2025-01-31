@@ -26,7 +26,7 @@ services:
           memory: 2048m
 
   cloudflared:
-    image: cloudflare/cloudflared:2024.6.0@sha256:8245fa2eeeabf437b061909cd59f123b39730f626bc676dc37cd3fb9f6880580
+    image: cloudflare/cloudflared:2025.1.1@sha256:bc2b3edd9eb0257a1a1fc58113e97426afe524e04b898173cd7df01442bcb4b3
     hostname: cloudflared
     container_name: influxdb__cloudflared
     restart: unless-stopped
