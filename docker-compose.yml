@@ -1,6 +1,6 @@
 services:
   influxdb:
-    image: influxdb:2.7.12@sha256:b146536136cbd8aac5a7c64725a0387cac1e2e0d17a49c50ca229a073227b5fb
+    image: influxdb:2.7.12@sha256:9bd00fec36c83a49ec02696cfb81456e0829bb010d0a7f6ed3ded434c3647970
     hostname: influxdb
     container_name: influxdb__influxdb
     restart: unless-stopped
